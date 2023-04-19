@@ -13,21 +13,28 @@ class Game:
                 sb += '\n'
         return sb
 
-    def play(self, pos):
-        self.board[pos] = self.current
+    def play(self, pos, unplay=False):
+        """
+        joue un coup
+        :param pos: la position ou poser le pion
+        :param unplay: si true remplie le pion a la pos specifie par None et revient au tour precedent
+        """
+        self.board[pos] = None if unplay else self.current
         self.current = not self.current
-        self.turn += 1
+        self.turn += -1 if unplay else 1
 
     def moves(self):
+        """
+        Coups possibles
+        :return: liste des coups possibles
+        """
         return [i for i, v in enumerate(self.board) if v is None]
 
-    def child_state(self, pos,player):
-        g=Game(self.board[:])
-        g.current=player
-        g.play(pos)
-        return g
-
     def winner(self):
+        """
+        Verifie si la partie est finie
+        :return: Draw si nulle, True si croix gagne, False si rond gagne, None si la partie n'est pas finie
+        """
         # check lines and rows
         for i in range(3):
             if set(self.board[(i * 3):(i * 3) + 3]) == set([True]) or set(self.board[(i * 3):(i * 3) + 3]) == set(

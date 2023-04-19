@@ -9,7 +9,7 @@ while g.winner() is None:
     print(g)
     print('coups possibles ' + ' '.join([str(i) for i in g.moves()]))
     pos = None
-    if not g.current:
+    if g.current:
         while pos not in g.moves():
             try:
                 pos = int(input('endroit ou jouer '))
