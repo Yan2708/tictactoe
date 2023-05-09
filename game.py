@@ -8,7 +8,7 @@ class Game:
     def __str__(self):
         sb = ''
         for i in range(9):
-            sb += 'N ' if self.board[i] is None else 'X ' if self.board[i] is True else 'O '
+            sb += '_ ' if self.board[i] is None else 'X ' if self.board[i] is True else 'O '
             if (i + 1) % 3 == 0:
                 sb += '\n'
         return sb
